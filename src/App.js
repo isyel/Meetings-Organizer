@@ -9,10 +9,12 @@ import Navigation from './Navigation';
 import Register from './Register';
 import Login from './Login';
 import Meetings from './Meetings';
+import CheckIn from './CheckIn';
+import Attendees from './Attendees';
 
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({})
   const [displayName, setDisplayName] = useState(null)
   const [userID, setUserID] = useState(null)
   const [meetings, setMeetings] = useState([])
@@ -90,7 +92,9 @@ function App() {
       <Router>
         <Login path="/login" />
         <Register path="/register" registerUser={registerUser} />
-        <Meetings path="/meetings" addMeeting={addMeeting} />
+        <Meetings path="/meetings" addMeeting={addMeeting} meetings={meetings} userID={userID}/>
+        <Attendees path="/attendees/:userID/:meetingID" adminUser={userID} />
+        <CheckIn path="/checkin/:userID/:meetingID" />
         <Home path="/" user={user}/>
       </Router>
     </>
